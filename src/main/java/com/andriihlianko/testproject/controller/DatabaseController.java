@@ -9,7 +9,6 @@ import com.andriihlianko.testproject.util.constants.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +32,9 @@ public class DatabaseController {
 
     @GetMapping("/")
     public List<Customer> getAllRecords() {
-        if (repository.count()==0){
+        if (repository.count() == 0) {
             ResponseEntity response = syncController.insertAllRecords();
-            if(!response.getStatusCode().equals(new ResponseEntity(HttpStatus.OK).getStatusCode())) {
+            if (!response.getStatusCode().equals(new ResponseEntity(HttpStatus.OK).getStatusCode())) {
                 throw new IncorrectDataException("Can't sync values to db.");
             }
         }
@@ -51,7 +50,7 @@ public class DatabaseController {
             syncController.insertAllRecords();
         }
         List<String> states = new ArrayList<>();
-        if(state!=null) {
+        if (state != null) {
             states = Arrays.asList(state);
         }
         try {
@@ -60,7 +59,7 @@ public class DatabaseController {
                 throw new NotFoundException(Messages.ERROR_CUSTOMER_NOT_FOUND);
             }
             return result;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IncorrectDataException(Messages.INCORRECT_DATA);
         }
     }

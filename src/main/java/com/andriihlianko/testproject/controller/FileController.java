@@ -37,14 +37,14 @@ public class FileController {
 
     @GetMapping
     public List<Customer> getCustomersByGenderByYearByState(@RequestParam(value = "gender", required = false) String gender,
-                               @RequestParam(value = "year", required = false) String year,
-                               @RequestParam(value = "state", required = false) String[] state) throws NotFoundException {
+                                                            @RequestParam(value = "year", required = false) String year,
+                                                            @RequestParam(value = "state", required = false) String[] state) throws NotFoundException {
         if (customersList.size() == 0) {
             getAllRecords();
         }
         List<String> states = new ArrayList<>();
-        if(state!=null) {
-             states = Arrays.asList(state);
+        if (state != null) {
+            states = Arrays.asList(state);
         }
         try {
             List<Customer> result = filter.filter(customersList, gender, year, states);
@@ -52,7 +52,7 @@ public class FileController {
                 throw new NotFoundException(Messages.ERROR_CUSTOMER_NOT_FOUND);
             }
             return result;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IncorrectDataException(Messages.INCORRECT_DATA);
         }
     }

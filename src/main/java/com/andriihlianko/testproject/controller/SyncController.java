@@ -20,7 +20,7 @@ public class SyncController {
     public ResponseEntity insertAllRecords() {
         try {
             repository.saveAll(fileController.getAllRecords());
-            return new ResponseEntity("Sync ok",HttpStatus.OK);
+            return new ResponseEntity("Sync ok", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }

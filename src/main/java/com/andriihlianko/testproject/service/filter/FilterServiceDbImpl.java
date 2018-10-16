@@ -14,10 +14,11 @@ import java.util.stream.Collectors;
 public class FilterServiceDbImpl implements FilterService {
     @Autowired
     CustomerRepository customerRepository;
+
     @Override
-    public List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException{
-        return customerRepository.findAll().stream().filter(line -> gender == null || Double.valueOf(gender)==(line.getGender()))
-                .filter(line -> year == null || this.getBirthYear(line)==Integer.valueOf(year) )
+    public List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException {
+        return customerRepository.findAll().stream().filter(line -> gender == null || Double.valueOf(gender) == (line.getGender()))
+                .filter(line -> year == null || this.getBirthYear(line) == Integer.valueOf(year))
                 .filter(line -> states.size() == 0 || states.contains(line.getStatus()))
                 .collect(Collectors.toList());
     }

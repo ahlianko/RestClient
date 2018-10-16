@@ -12,11 +12,12 @@ import java.util.stream.Collectors;
 public class FilterServiceFileImpl implements FilterService {
     @Autowired
     CustomerRepository customerRepository;
+
     @Override
-    public List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException{
+    public List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException {
         return customersList.stream()
-                .filter(line -> gender == null || Double.valueOf(gender)==(line.getGender()))
-                .filter(line -> year == null || this.getBirthYear(line)==Integer.valueOf(year) )
+                .filter(line -> gender == null || Double.valueOf(gender) == (line.getGender()))
+                .filter(line -> year == null || this.getBirthYear(line) == Integer.valueOf(year))
                 .filter(line -> states.size() == 0 || states.contains(line.getStatus()))
                 .collect(Collectors.toList());
     }

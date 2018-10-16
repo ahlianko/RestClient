@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component("parserCsv")
-public class ParserCsv implements Parser{
+public class ParserCsv implements Parser {
     public <T> List<T> parse(Class<T> type, String fileName) {
         try {
             CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader().withSkipFirstDataRow(true);

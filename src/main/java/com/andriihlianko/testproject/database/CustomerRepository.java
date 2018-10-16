@@ -12,9 +12,13 @@ import java.util.stream.Stream;
 @Transactional
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> findAllByGenderEquals(double gender);
+
     List<Customer> findAllByDateOfBirthEquals(String dateOfBirth);
+
     List<Customer> findAllByStatusEquals(String status);
+
     List<Customer> findAllByGenderAndDateOfBirthAndStatus(double gender, String dateOfBirth, String status);
+
     @Transactional
     Stream<Customer> streamAllByGender(double gender);
 }

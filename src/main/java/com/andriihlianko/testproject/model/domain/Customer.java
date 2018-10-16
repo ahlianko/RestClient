@@ -14,26 +14,26 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @JsonNaming(PropertyNamingStrategy.UpperCamelCaseStrategy.class)
-@JsonIgnoreProperties(value = { "Id" , "InterestRate"})
+@JsonIgnoreProperties(value = {"Id", "InterestRate"})
 public class Customer {
     @Id
     @JsonProperty
     Long ID;
     @JsonProperty
-    double  Amount,ApplicationSignedHour,ApplicationSignedWeekday, DebtToIncome,Education, EmploymentStatus,
+    double Amount, ApplicationSignedHour, ApplicationSignedWeekday, DebtToIncome, Education, EmploymentStatus,
             ExistingLiabilities;
     @JsonProperty
     double gender;
     @JsonProperty
-    double HomeOwnershipType,IncomeFromPrincipalEmployer,IncomeTotal,
-            LoanDuration, MaritalStatus, NoOfPreviousLoansBeforeLoan,OccupationArea,UseOfLoan,VerificationType, PreviousScore;
+    double HomeOwnershipType, IncomeFromPrincipalEmployer, IncomeTotal,
+            LoanDuration, MaritalStatus, NoOfPreviousLoansBeforeLoan, OccupationArea, UseOfLoan, VerificationType, PreviousScore;
     @JsonProperty
-    String  status,City,Country,CreditScoreEsEquifaxRisk,dateOfBirth,EmploymentDurationCurrentEmployer,
+    String status, City, Country, CreditScoreEsEquifaxRisk, dateOfBirth, EmploymentDurationCurrentEmployer,
             EmploymentPosition;
     @JsonProperty(value = "Interest rate (APR)")
     double InterestRate;
     @JsonProperty
-    String LoanDate,NewCreditCustomer, WorkExperience,Defaulted, DefaultDate;
+    String LoanDate, NewCreditCustomer, WorkExperience, Defaulted, DefaultDate;
 
     public Customer() {
 

@@ -2,6 +2,7 @@ package com.andriihlianko.testproject.service.filter;
 
 import com.andriihlianko.testproject.exception.IncorrectDataException;
 import com.andriihlianko.testproject.model.domain.Customer;
+import com.andriihlianko.testproject.util.constants.Messages;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -12,7 +13,8 @@ import java.util.List;
 
 @Service
 public interface FilterService {
-    List<Customer> filter (List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException;
+    List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException;
+
     default int getBirthYear(Customer customer) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         try {
@@ -20,8 +22,8 @@ public interface FilterService {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             return calendar.get(Calendar.YEAR);
-        } catch (ParseException e){
-            throw new IncorrectDataException("Incorrect date format. Follow dd/mm/yyyy");
+        } catch (ParseException e) {
+            throw new IncorrectDataException(Messages.INCORRECT_DATE_FORMAT);
         }
 
     }
