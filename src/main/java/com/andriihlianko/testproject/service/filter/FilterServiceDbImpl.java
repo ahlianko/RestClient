@@ -5,15 +5,17 @@ import com.andriihlianko.testproject.model.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component("dbFilter")
-@Transactional
 public class FilterServiceDbImpl implements FilterService {
+    private final CustomerRepository customerRepository;
+
     @Autowired
-    CustomerRepository customerRepository;
+    public FilterServiceDbImpl(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException {

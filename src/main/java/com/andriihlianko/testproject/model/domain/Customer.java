@@ -18,22 +18,22 @@ import javax.persistence.Id;
 public class Customer {
     @Id
     @JsonProperty
-    Long ID;
+    private Long ID;
     @JsonProperty
-    double Amount, ApplicationSignedHour, ApplicationSignedWeekday, DebtToIncome, Education, EmploymentStatus,
+    private double Amount, ApplicationSignedHour, ApplicationSignedWeekday, DebtToIncome, Education, EmploymentStatus,
             ExistingLiabilities;
     @JsonProperty
-    double gender;
+    private double gender;
     @JsonProperty
-    double HomeOwnershipType, IncomeFromPrincipalEmployer, IncomeTotal,
+    private double HomeOwnershipType, IncomeFromPrincipalEmployer, IncomeTotal,
             LoanDuration, MaritalStatus, NoOfPreviousLoansBeforeLoan, OccupationArea, UseOfLoan, VerificationType, PreviousScore;
     @JsonProperty
-    String status, City, Country, CreditScoreEsEquifaxRisk, dateOfBirth, EmploymentDurationCurrentEmployer,
+    private String status, City, Country, CreditScoreEsEquifaxRisk, dateOfBirth, EmploymentDurationCurrentEmployer,
             EmploymentPosition;
     @JsonProperty(value = "Interest rate (APR)")
-    double InterestRate;
+    private double InterestRate;
     @JsonProperty
-    String LoanDate, NewCreditCustomer, WorkExperience, Defaulted, DefaultDate;
+    private String LoanDate, NewCreditCustomer, WorkExperience, Defaulted, DefaultDate;
 
     public Customer() {
 

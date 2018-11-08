@@ -4,9 +4,8 @@ import com.andriihlianko.testproject.exception.IncorrectDataException;
 import com.andriihlianko.testproject.exception.NotFoundException;
 import com.andriihlianko.testproject.model.domain.Customer;
 import com.andriihlianko.testproject.service.filter.FilterService;
-import com.andriihlianko.testproject.service.utils.Parser;
+import com.andriihlianko.testproject.service.synchronization.SyncService;
 import com.andriihlianko.testproject.util.constants.Messages;
-import com.andriihlianko.testproject.util.constants.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +20,20 @@ import java.util.List;
 @RestController
 @RequestMapping("api/file")
 public class FileController {
-    @Autowired
-    @Qualifier("fileFilter")
-    private FilterService filter;
-    @Autowired
-    @Qualifier("parserCsv")
-    private Parser parser;
-    private static List<Customer> customersList = new ArrayList<>();
+    private final FilterService filter;
+    private final SyncService syncService;
+    private List<Customer> customersList = new ArrayList<>();
 
+    @Autowired
+    public FileController(@Qualifier("sync") SyncService syncService, @Qualifier("fileFilter") FilterService filter) {
+        this.syncService = syncService;
+        this.filter = filter;
+    }
     @GetMapping("/")
     public List<Customer> getAllRecords() {
-        customersList = parser.parse(Customer.class, Paths.FILE_NAME);
+        if (customersList.isEmpty()) {
+            customersList = syncService.syncWithFile();
+        }
         return customersList;
     }
 
@@ -39,8 +41,8 @@ public class FileController {
     public List<Customer> getCustomersByGenderByYearByState(@RequestParam(value = "gender", required = false) String gender,
                                                             @RequestParam(value = "year", required = false) String year,
                                                             @RequestParam(value = "state", required = false) String[] state) throws NotFoundException {
-        if (customersList.size() == 0) {
-            getAllRecords();
+        if (customersList.isEmpty()) {
+            customersList = syncService.syncWithFile();
         }
         List<String> states = new ArrayList<>();
         if (state != null) {

@@ -1,8 +1,8 @@
 package com.andriihlianko.testproject.util.constants;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public interface Paths {
-    String FILE_NAME = "files/loans_data.csv";
+/**
+ * Constants with path variables.
+ */
+public abstract class Paths {
+	public static String FILE_NAME = "files/loans_data.csv";
 }
