@@ -6,5 +6,5 @@ import java.util.List;
 
 @Service
 public interface Parser {
-    <T> List<T> parse(Class<T> type, String fileName);
+	<T> List<T> parse(Class<T> type, String fileName);
 }

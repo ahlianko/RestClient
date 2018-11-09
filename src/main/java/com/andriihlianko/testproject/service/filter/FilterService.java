@@ -13,18 +13,18 @@ import java.util.List;
 
 @Service
 public interface FilterService {
-    List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException;
+	List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException;
 
-    default int getBirthYear(Customer customer) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        try {
-            Date date = sdf.parse(customer.getDateOfBirth());
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            return calendar.get(Calendar.YEAR);
-        } catch (ParseException e) {
-            throw new IncorrectDataException(Messages.INCORRECT_DATE_FORMAT);
-        }
+	default int getBirthYear(Customer customer) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+		try {
+			Date date = sdf.parse(customer.getDateOfBirth());
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			return calendar.get(Calendar.YEAR);
+		} catch (ParseException e) {
+			throw new IncorrectDataException(Messages.INCORRECT_DATE_FORMAT);
+		}
 
-    }
+	}
 }

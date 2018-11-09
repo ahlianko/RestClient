@@ -11,17 +11,17 @@ import java.util.List;
 
 @Component("parserCsv")
 public class ParserCsv implements Parser {
-    public <T> List<T> parse(Class<T> type, String fileName) {
-        try {
-            CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader().withSkipFirstDataRow(true);
-            CsvMapper mapper = new CsvMapper();
-            ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource(fileName).getFile());
-            MappingIterator<T> readValues =
-                    mapper.readerFor(type).with(bootstrapSchema).readValues(file);
-            return readValues.readAll();
-        } catch (Exception e) {
-            return Collections.emptyList();
-        }
-    }
+	public <T> List<T> parse(Class<T> type, String fileName) {
+		try {
+			CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader().withSkipFirstDataRow(true);
+			CsvMapper mapper = new CsvMapper();
+			ClassLoader classLoader = getClass().getClassLoader();
+			File file = new File(classLoader.getResource(fileName).getFile());
+			MappingIterator<T> readValues =
+					mapper.readerFor(type).with(bootstrapSchema).readValues(file);
+			return readValues.readAll();
+		} catch (Exception e) {
+			return Collections.emptyList();
+		}
+	}
 }

@@ -14,7 +14,7 @@ public interface SyncService {
 	/**
 	 * Synchronize data from file to db.
 	 */
-	void syncFileWithDb();
+	void syncFileWithDb() throws Exception;
 
 	/**
 	 * Synchronize data from file and return list.

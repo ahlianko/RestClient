@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/data")
 public class SyncController {
-    private final SyncService syncService;
+	private final SyncService syncService;
 
-    @Autowired
-    public SyncController(@Qualifier("sync") SyncService syncService) {
-        this.syncService = syncService;
-    }
+	@Autowired
+	public SyncController(@Qualifier("sync") SyncService syncService) {
+		this.syncService = syncService;
+	}
 
-    /**
-     * Synchronize data from file to db.
-     *
-     * @return ResponseEntity
-     */
-    @GetMapping("sync")
-    public ResponseEntity<String> insertAllRecords() {
-        try {
-            syncService.syncFileWithDb();
-            return new ResponseEntity<>("Sync ok", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-        }
-    }
+	/**
+	 * Synchronize data from file to db.
+	 *
+	 * @return ResponseEntity
+	 */
+	@GetMapping("sync")
+	public ResponseEntity<String> insertAllRecords() {
+		try {
+			syncService.syncFileWithDb();
+			return new ResponseEntity<>("Sync ok", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
 }

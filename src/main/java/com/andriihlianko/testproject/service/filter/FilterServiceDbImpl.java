@@ -10,18 +10,25 @@ import java.util.stream.Collectors;
 
 @Component("dbFilter")
 public class FilterServiceDbImpl implements FilterService {
-    private final CustomerRepository customerRepository;
+	private final CustomerRepository customerRepository;
 
-    @Autowired
-    public FilterServiceDbImpl(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+	@Autowired
+	public FilterServiceDbImpl(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
 
-    @Override
-    public List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException {
-        return customerRepository.findAll().stream().filter(line -> gender == null || Double.valueOf(gender) == (line.getGender()))
-                .filter(line -> year == null || this.getBirthYear(line) == Integer.valueOf(year))
-                .filter(line -> states.size() == 0 || states.contains(line.getStatus()))
-                .collect(Collectors.toList());
-    }
+	@Override
+	public List<Customer> filter(List<Customer> customersList, String gender, String year, List<String> states) throws NumberFormatException {
+		return customerRepository.findAll().stream().filter(line -> gender == null || Double.valueOf(gender) == (line.getGender()))
+				.filter(line -> year == null || this.getBirthYear(line) == Integer.valueOf(year))
+				.filter(line -> states.size() == 0 || states.contains(line.getStatus()))
+				.collect(Collectors.toList());
+	}
+
+	public List<Customer> filter(String gender, String year, List<String> states) throws NumberFormatException {
+		return customerRepository.findAll().stream().filter(line -> gender == null || Double.valueOf(gender) == (line.getGender()))
+				.filter(line -> year == null || this.getBirthYear(line) == Integer.valueOf(year))
+				.filter(line -> states.size() == 0 || states.contains(line.getStatus()))
+				.collect(Collectors.toList());
+	}
 }
